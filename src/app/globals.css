@@ -229,9 +229,9 @@ select {
   border-radius:0.5rem ; 
 
   /* Fondo elegante */
-  background: var(--color-nails-champagne, #FFFDF7);
+  background: var(--color-nails-lavanda);
 
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: var(--color-nails-gold) 2px solid;
 
   box-shadow: 0 4px 20px -2px rgba(255, 255, 255, 0.2);
 
@@ -242,7 +242,7 @@ select {
 }
 .nails-product-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.6); 
+  border-color: var(--color-nails-malva); 
   box-shadow: 0 10px 25px -4px rgba(255, 255, 255, 0.15);
   border: 5px solid rgba(255, 255, 255, 0.25);
 }
@@ -276,14 +276,14 @@ select {
 
   border-radius: 1rem;
 
-  background: var(--color-nails-gold);
+  background: var(--color-nails-malva);
 
   padding: 0.8rem;
 
   font-size: 0.82rem;
   font-weight: 700;
 
-  color: var(--color-nails-white);
+  color: var(--color-nails-charcoal);
 
   transition:
     transform 0.25s ease,
@@ -338,14 +338,14 @@ select {
   color: var(--color-nails-malva);
 }
 
-.nails-button-calendar {
+.nails-button-reservar {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
 
   border-radius: 1rem;
 
-  background: var(--color-nails-gold);
+  background: var(--color-nails-malva);
 
   padding: 0.8rem 1rem;
 

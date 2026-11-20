@@ -19,7 +19,7 @@ export default function CartBar({ carrito, onOpenCheckout }) {
           </div>
 
           <div>
-            <p className="text-sm font-bold text-nails-brown">
+            <p className="text-sm font-bold text-nails-charcoal">
               {cantidadServicios} Servicio(s)
             </p>
             <p className="text-xl font-black text-gray-900">
@@ -30,7 +30,7 @@ export default function CartBar({ carrito, onOpenCheckout }) {
 
         <button
           onClick={onOpenCheckout}
-          className="nails-button-calendar"
+          className="nails-button-reservar"
         >
           Reservar Cita
         </button>

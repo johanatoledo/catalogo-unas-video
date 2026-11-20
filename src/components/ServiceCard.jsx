@@ -18,15 +18,7 @@ export default function ServiceCard({
 
   if (!service) return null;
 
-  const {
-    id,
-    nombre: name,
-    descripcion: description,
-    precio: servicePrice,
-    duracionMinutos: durationMinutes,
-    imagen: image,
-    video,
-  } = service;
+  const { id, name, description, price: servicePrice, durationMinutes, image, video, } = service;
 
   const isSelected = quantity > 0;
   const price = Number(servicePrice) || 0;
@@ -48,10 +40,10 @@ export default function ServiceCard({
           priority={priority}
         />
 
-    
+        
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-nails-caramelo/20 via-transparent to-transparent" />
 
-    
+      
         <button
           type="button"
           onClick={() => setIsDetailsOpen(true)}
@@ -104,7 +96,7 @@ export default function ServiceCard({
           {name}
         </h3>
 
-    
+        
         <div className="mt-2 min-h-6">
           {durationMinutes > 0 && (
             <div className="flex items-center gap-1.5 text-sm text-gray-500">
@@ -114,7 +106,7 @@ export default function ServiceCard({
           )}
         </div>
 
-      
+        
         <div className="mt-auto pt-2">
           <div className="flex items-end justify-between gap-4">
             <div>
@@ -122,7 +114,7 @@ export default function ServiceCard({
                 Precio
               </p>
 
-              <p className="mt-1 text-xl font-bold text-nails-brown">
+              <p className="mt-1 text-xl font-bold text-nails-black">
                 S/ {price.toFixed(2)}
               </p>
             </div>
@@ -132,13 +124,13 @@ export default function ServiceCard({
                 Reserva 20%
               </p>
 
-              <p className="mt-1 text-base font-bold text-nails-brown">
+              <p className="mt-1 text-base font-bold text-nails-charcoal">
                 S/ {reservationAmount.toFixed(2)}
               </p>
             </div>
           </div>
 
-        
+          
           <div className="mt-5 flex min-h-5 justify-end">
             {isSelected ? (
               <button
