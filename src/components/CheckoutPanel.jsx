@@ -40,34 +40,13 @@ export default function CheckoutPanel({
   onCitaCreada,
 }) {
   const router = useRouter();
-
   const itemsServicio = Array.isArray(carrito) ? carrito: [];
-
-  /* =========================
-     DATOS DEL CLIENTE
-  ========================= */
-
   const [clienteNombre, setClienteNombre] = useState("");
-
   const [clienteTelefono, setClienteTelefono] = useState("");
-
-  /* =========================
-     CITA
-  ========================= */
-
   const [fecha, setFecha] = useState("");
   const [hora, setHora] = useState("");
-
-  /* =========================
-     PAGO
-  ========================= */
-
   const [metodoPago, setMetodoPago] =  useState("yape");
   const [numeroOperacion, setNumeroOperacion] = useState("");
-
-  /* =========================
-     ESTADOS
-  ========================= */
   const [cargando, setCargando] = useState(false);
   const [mensajeExito, setMensajeExito] = useState("");
 
@@ -90,19 +69,12 @@ export default function CheckoutPanel({
   const montoRestante = totalServicio - montoReserva;
   const datosPago = DATOS_PAGO[metodoPago];
 
-  /* =========================
-     CAMBIAR MÉTODO DE PAGO
-  ========================= */
 
   const cambiarMetodoPago = (metodo) => {
     setMetodoPago(metodo);
     setNumeroOperacion("");
     setPagoError("");
   };
-
-  /* =========================
-     CONFIRMAR CITA
-  ========================= */
 
   const confirmarCita = async () => {
     setNombreError("");
@@ -117,14 +89,13 @@ export default function CheckoutPanel({
     const operacionLimpia = numeroOperacion.trim();
     let hayError = false;
 
-    /* Nombre */
+   
 
     if (!nombreLimpio) {
       setNombreError( "Ingresa tu nombre para agendar la cita.");
       hayError = true;
     }
 
-    /* Teléfono */
 
     if (!telefonoLimpio) {
       setTelefonoError( "Ingresa tu número de celular.");
@@ -137,21 +108,16 @@ export default function CheckoutPanel({
       hayError = true;
     }
 
-    /* Fecha */
-
     if (!fecha) {
       setFechaError(  "Selecciona una fecha.");
       hayError = true;
     }
-
-    /* Hora */
 
     if (!hora) {
       setHoraError( "Selecciona una hora." );
       hayError = true;
     }
 
-    /* Operación */
 
     if (!operacionLimpia) {
       setPagoError(
@@ -188,7 +154,6 @@ export default function CheckoutPanel({
       };
 
       const respuesta = await crearCita(data);
-
       const idRegistrado = respuesta?.id || respuesta?.citaId || respuesta?.servicioId;
 
       if (!idRegistrado) {
@@ -218,14 +183,11 @@ export default function CheckoutPanel({
 
   return (
     <div  className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 px-3 py-3 backdrop-blur-sm sm:px-4 sm:py-6 ">
-      {/* MODAL */}
-      <div className=" flex h-full max-h-[96vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl  bg-nails-brown/40 shadow-2xl sm:h-auto sm:max-h-[90vh] sm:rounded-3xl ">
-        {/* =========================
-            HEADER
-        ========================== */}
-
-        <div className=" flex shrink-0 items-center justify-between border-b  bg-nails-brown px-4 py-4  sm:px-6 sm:py-5 ">
-          <h2 className=" font-title text-lg font-bold  text-nails-yellow  sm:text-2xl " >
+    
+      <div className=" flex h-full max-h-[96vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl  bg-nails-lavanda/40 shadow-2xl sm:h-auto sm:max-h-[90vh] sm:rounded-3xl ">
+       
+        <div className=" flex shrink-0 items-center justify-between border-b  bg-nails-c px-4 py-4  sm:px-6 sm:py-5 ">
+          <h2 className="  text-lg font-bold  text-nails-charcoal  sm:text-2xl " >
             CONFIRMAR CITA
           </h2>
 
@@ -233,24 +195,20 @@ export default function CheckoutPanel({
             type="button"
             onClick={onClose}
             aria-label="Cerrar"
-            className=" rounded-full   bg-nails-caramelo p-2  text-nails-white transition hover:bg-nails-gold  hover:text-nails-white "
+            className=" rounded-full   bg-nails-malva p-2  text-nails-charcoal transition hover:bg-nails-gold  hover:text-nails-white "
            >
             <X size={20} />
           </button>
         </div>
 
-        {/* =========================
-            CONTENIDO CON SCROLL
-        ========================== */}
+      
 
         <div className=" min-h-0 flex-1 overflow-y-auto  px-4 pb-6 sm:px-6 ">
-          <p className=" mt-3 text-center text-xs font-black  text-nails-white sm:text-sm ">
+          <p className=" mt-3 text-center text-xs font-black  text-nails-charcoal sm:text-sm ">
             ¡Al confirmar el pago, tu cita quedará registrada!
           </p>
 
-          {/* =========================
-              SERVICIOS
-          ========================== */}
+          
 
           <div className=" mt-5 max-h-56 space-y-3 overflow-y-auto rounded-2xl  p-2 sm:p-3 " >
             {itemsServicio.map(
@@ -266,13 +224,13 @@ export default function CheckoutPanel({
                     <div className=" flex  min-w-0 items-center  gap-2 " >
                       <Sparkles
                         size={20}
-                        className=" shrink-0  text-nails-yellow "
+                        className=" shrink-0  text-nails-gold "
                       />
 
                       <div className="min-w-0">
-                        <p className=" text-nails-white ">  {item.nombre}</p>
+                        <p className=" text-nails-black ">  {item.nombre}</p>
 
-                        <p className="  mt-1 text-xs font-medium  text-nails-white/70 " >
+                        <p className="  mt-1 text-xs font-bold  text-nails-charcoal/70 " >
                           Precio: S/{" "}
                           {precio.toFixed( 2 )}
                         </p>
@@ -280,9 +238,9 @@ export default function CheckoutPanel({
                     </div>
 
                     <div className=" shrink-0 text-right " >
-                      <p className=" text-xs  font-medium  text-nails-yellow " >  Reserva 20% </p>
+                      <p className=" text-xs  font-bold  text-nails-charcoal" >  Reserva 20% </p>
 
-                      <p className="  text-sm font-bold  text-nails-white sm:text-base ">
+                      <p className="  text-sm   text-nails-charcoal sm:text-base ">
                         S/{" "}
                         {reservaServicio.toFixed( 2 )}
                       </p>
@@ -293,22 +251,20 @@ export default function CheckoutPanel({
             )}
           </div>
 
-          {/* =========================
-              DATOS CLIENTE
-          ========================== */}
+         
 
           <div className="mt-6">
-            <label className=" font-title text-lg  font-bold  text-nails-yellow " >
+            <label className="  text-lg  font-bold  text-nails-charcoal " >
                Datos del cliente
             </label>
 
             <div className=" mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 " >
-              {/* Nombre */}
+              
 
               <div>
                 <label
                   htmlFor="clienteNombre"
-                  className=" text-xs font-bold tracking-wider  text-nails-yellow "
+                  className=" text-xs font-bold tracking-wider  text-nails-charcoal "
                 >
                   Nombre y apellido
                   <span className="text-red-700">  {" "}* </span>
@@ -338,12 +294,12 @@ export default function CheckoutPanel({
                 )}
               </div>
 
-              {/* Teléfono */}
+              
 
               <div>
                 <label
                   htmlFor="clienteTelefono"
-                  className="  text-xs font-bold  tracking-wider text-nails-yellow "
+                  className="  text-xs font-bold  tracking-wider text-nails-charcoal "
                 >
                   Celular
                   <span className="text-red-700">
@@ -383,12 +339,10 @@ export default function CheckoutPanel({
             </div>
           </div>
 
-          {/* =========================
-              FECHA Y HORA
-          ========================== */}
+         
 
           <div className=" mt-6 flex flex-col gap-4 " >
-            <label className=" font-title text-lg font-bold text-nails-yellow " >
+            <label className="  text-lg font-bold text-nails-charcoal " >
               ¿Para cuándo desea agendar su cita?
               <span className="text-red-700">
                 {" "}*
@@ -397,10 +351,10 @@ export default function CheckoutPanel({
 
             <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 " >
               
-              {/* Fecha */}
+            
 
               <div  className=" flex  flex-col gap-1.5  " >
-                <label className="  text-xs font-bold tracking-wider  text-nails-yellow " >
+                <label className="  text-xs font-bold tracking-wider  text-nails-charcoal " >
                   Fecha de Reserva
                 </label>
 
@@ -423,10 +377,8 @@ export default function CheckoutPanel({
                 )}
               </div>
 
-              {/* Hora */}
-
               <div className=" flex flex-col gap-1.5 " >
-                <label className=" text-xs font-bold tracking-wider text-nails-yellow ">
+                <label className=" text-xs font-bold tracking-wider text-nails-charcoal ">
                   Hora Preferida
                 </label>
 
@@ -450,12 +402,10 @@ export default function CheckoutPanel({
             </div>
           </div>
 
-          {/* =========================
-              MÉTODO DE PAGO
-          ========================== */}
+         
 
           <div className="mt-6">
-            <label className=" font-title text-lg font-bold  text-nails-yellow ">
+            <label className="  text-lg font-bold  text-nails-yellow ">
               Método de pago
               <span className="text-red-700">
                 {" "}*
@@ -463,7 +413,7 @@ export default function CheckoutPanel({
             </label>
 
             <div className=" mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3 " >
-              {/* YAPE */}
+             
 
               <button
                 type="button"
@@ -472,8 +422,8 @@ export default function CheckoutPanel({
                 }
                 className={` flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition
                   ${ metodoPago ==="yape"
-                      ? "border-nails-gold bg-nails-caramelo text-nails-white"
-                      : "border-nails-gold bg-nails-white text-nails-brown"
+                      ? "border-nails-gold bg-nails-malva text-nails-charcoal"
+                      : "border-nails-gold bg-nails-white text-nails-malva"
                   }
                 `}
               >
@@ -483,7 +433,7 @@ export default function CheckoutPanel({
                 Yape
               </button>
 
-              {/* PLIN */}
+             
 
               <button
                 type="button"
@@ -492,8 +442,8 @@ export default function CheckoutPanel({
                 }
                 className={` flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition
                   ${ metodoPago === "plin"
-                      ? "border-nails-gold bg-nails-caramelo text-nails-white"
-                      : "border-nails-gold bg-nails-white text-nails-brown"
+                      ? "border-nails-gold bg-nails-malva text-nails-charcoal"
+                      : "border-nails-gold bg-nails-white text-nails-malva"
                   }
                 `}
               >
@@ -504,8 +454,6 @@ export default function CheckoutPanel({
                 Plin
               </button>
 
-              {/* TRANSFERENCIA */}
-
               <button
                 type="button"
                 onClick={() =>
@@ -514,8 +462,8 @@ export default function CheckoutPanel({
                 className={` flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition
                   ${
                     metodoPago === "transferencia"
-                      ? "border-nails-gold bg-nails-caramelo text-nails-white"
-                      : "border-nails-gold bg-nails-white text-nails-brown"
+                      ? "border-nails-gold bg-nails-malva text-nails-charcoal"
+                      : "border-nails-gold bg-nails-white text-nails-malva"
                   }
                 `}
               >
@@ -528,34 +476,30 @@ export default function CheckoutPanel({
             </div>
           </div>
 
-          {/* =========================
-              DATOS DINÁMICOS DE PAGO
-          ========================== */}
-
           <div className=" mt-4 rounded-2xl border border-nails-gold p-4 " >
             {(metodoPago === "yape" || metodoPago === "plin") && ( 
               <div className=" flex flex-col items-center gap-4 sm:flex-row sm:justify-between " >
                 <div className=" text-center sm:text-left " >
-                  <p className="  font-title text-lg font-bold text-nails-yellow ">
+                  <p className=" text-lg font-bold text-nails-yellow ">
                     {datosPago.nombre}
                   </p>
 
-                  <p className="  mt-2 text-xs  text-nails-white/70 ">
+                  <p className="  mt-2 text-xs  text-nails-charcoal ">
                     Realiza el pago de la reserva al número:
                   </p>
 
-                  <p className="  mt-2 text-xl font-black text-nails-white ">
+                  <p className="  mt-2 text-xl font-black text-nails-black ">
                     {datosPago.numero}
                   </p>
 
-                  <p className="  mt-1 text-xs text-nails-white/70 " >
+                  <p className="  mt-1 text-xs text-nails-black/70 " >
                     Titular:{" "}
                     {datosPago.titular}
                   </p>
                 </div>
 
                 {datosPago.qr && (
-                  <div className=" relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl bg-nails-gold p-2 sm:h-36 sm:w-36 " >
+                  <div className=" relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl bg-nails-malva p-2 sm:h-36 sm:w-36 " >
                     <Image
                       src={ datosPago.qr }
                       alt={`QR de ${datosPago.nombre}`}
@@ -570,11 +514,11 @@ export default function CheckoutPanel({
 
             {metodoPago === "transferencia" && (
               <div>
-                <p className=" font-title text-lg font-bold text-nails-yellow " >
+                <p className="  text-lg font-bold text-nails-charcoal " >
                   Transferencia bancaria
                 </p>
 
-                <div className=" mt-3 space-y-2 text-sm text-nails-white " >
+                <div className=" mt-3 space-y-2 text-sm text-nails-black " >
                   <p><span className="font-bold"> Banco: </span>{" "} {datosPago.banco} </p>
 
                   <p> <span className="font-bold"> Titular: </span>{" "} {datosPago.titular} </p>
@@ -592,7 +536,7 @@ export default function CheckoutPanel({
           ========================== */}
 
           <div className="mt-5">
-            <label htmlFor="numeroOperacion" className="  font-title text-base text-nails-yellow " >
+            <label htmlFor="numeroOperacion" className=" text-base text-nails-black " >
               Número de operación
               <span className="text-red-700"> {" "}* </span>
             </label>
@@ -626,14 +570,12 @@ export default function CheckoutPanel({
           </div>
         </div>
 
-        {/* =========================
-            FOOTER
-        ========================== */}
+      
 
-        <div className="shrink-0 border-t  bg-nails-brown px-4 py-4 sm:px-6 sm:py-5 " >
+        <div className="shrink-0 border-t  bg-nails-lavanda/40 px-4 py-4 sm:px-6 sm:py-5 " >
           <div className=" flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between " >
             <div>
-              <p className=" text-xs font-semibold text-nails-white sm:text-sm " >
+              <p className=" text-xs font-semibold text-nails-black sm:text-sm " >
                 Reserva a pagar ahora
               </p>
 
@@ -642,7 +584,7 @@ export default function CheckoutPanel({
                 {montoReserva.toFixed( 2 )}
               </p>
 
-              <p className=" mt-1 text-xs text-nails-white/70 " >
+              <p className=" mt-1 text-xs text-red-700 " >
                 Saldo restante: S/{" "}
                 {montoRestante.toFixed( 2 )}
               </p>
