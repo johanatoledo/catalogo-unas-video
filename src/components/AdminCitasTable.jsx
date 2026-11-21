@@ -3,9 +3,6 @@
 import { useState } from "react";
 import { AlertCircle, Calendar, CheckCircle2, Clock, CreditCard, Phone, Sparkles, User, } from "lucide-react";
 import { formatearFecha, formatearHora } from "@/utils/dateUtils"
-/* =========================================================
-   HELPERS
-========================================================= */
 
 function normalizarBooleano(valor) {
   return (
@@ -56,9 +53,6 @@ function formatearMetodoPago(metodo) {
 }
 
 
-/* =========================================================
-   BADGE PAGO
-========================================================= */
 
 function PagoBadge({ pagoVerificado }) {
   return (
@@ -66,7 +60,7 @@ function PagoBadge({ pagoVerificado }) {
       className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-black uppercase leading-none ${
         pagoVerificado
           ?  "text-green-700"
-          : "text-amber-800"
+          : "text-nails"
       }`}
     >
       {pagoVerificado ? (
@@ -84,9 +78,7 @@ function PagoBadge({ pagoVerificado }) {
   );
 }
 
-/* =========================================================
-   BADGE ESTADO CITA
-========================================================= */
+
 
 function EstadoBadge({ pagoVerificado,}) {
   if (!pagoVerificado) {
@@ -102,9 +94,7 @@ function EstadoBadge({ pagoVerificado,}) {
   
 }
 
-/* =========================================================
-   SERVICIOS
-========================================================= */
+
 
 function ServiciosDetalle({ servicios }) {
   if (!servicios.length) {
@@ -142,17 +132,12 @@ function ServiciosDetalle({ servicios }) {
   );
 }
 
-/* =========================================================
-   COMPONENTE
-========================================================= */
+
 
 export default function AdminCitasTable({ citas = [], onMarcarAsistencia, onConfirmarPago, }) {
   const [filtroEstado, setFiltroEstado] = useState("todos");
   const [cargandoId, setCargandoId] = useState(null);
 
-  /* =======================================================
-     ACCIONES
-  ======================================================= */
 
   const handleConfirmarPago = async (id) => {
     setCargandoId(id);
@@ -174,9 +159,6 @@ export default function AdminCitasTable({ citas = [], onMarcarAsistencia, onConf
     }
   };
 
-  /* =======================================================
-   FILTROS
-======================================================= */
 
 const citasFiltradas = citas.filter( (cita) => {
     const pagoVerificado = normalizarBooleano( cita.pago_verificado );
@@ -203,9 +185,7 @@ const citasFiltradas = citas.filter( (cita) => {
 const totalPendientes = citas.filter( (cita) =>  !normalizarBooleano( cita.pago_verificado ) ).length;
 const totalConfirmadas = citas.filter( (cita) => normalizarBooleano( cita.pago_verificado ) && !esCitaAtendida( cita.estado ) ).length;
 const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).length;
-  /* =======================================================
-     SIN CITAS
-  ======================================================= */
+
 
   if (!citas.length) {
     return (
@@ -223,15 +203,11 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
     );
   }
 
-  /* =======================================================
-     ACCIÓN
-  ======================================================= */
-
  const renderAccion = ( cita, pagoVerificado ) => {
   const estaProcesando = cargandoId === cita.id;
   const estaAtendida = esCitaAtendida( cita.estado );
 
-  // Pago pendiente
+  
   if (!pagoVerificado) {
     return (
       <button
@@ -247,7 +223,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
     );
   }
 
-  // Cita finalizada
+  
   if (estaAtendida) {
     return (
       <div className="flex w-full items-center justify-center">
@@ -263,7 +239,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
     );
   }
 
-  // Pago confirmado, esperando atención
+  
   return (
     <button
       type="button"
@@ -282,9 +258,6 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
     <section className="mx-auto w-full max-w-400 px-3 py-6 sm:px-5 lg:px-6 xl:px-8">
       <div className="w-full overflow-hidden rounded-3xl bg-white shadow-xl">
 
-        {/* ===============================================
-            FILTROS
-        =============================================== */}
 
         <div className="flex w-full flex-wrap gap-2 border-b bg-gray-50 p-4 sm:gap-3 sm:p-5">
        
@@ -334,9 +307,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
           </div>
         ) : (
           <>
-            {/* =============================================
-                MÓVIL + TABLET
-            ============================================= */}
+    
 
             <div className="grid gap-4 p-4 xl:hidden">
               {citasFiltradas.map( (cita) => {
@@ -352,7 +323,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
                       key={cita.id}
                       className="rounded-3xl border border-black/10 bg-white p-4 shadow-sm"
                     >
-                      {/* CABECERA */}
+                      
 
                       <div className="mb-4 flex items-start justify-between gap-3">
                         <div>
@@ -369,7 +340,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
 
                       <div className="grid gap-4">
 
-                        {/* DATOS CLIENTE */}
+                      
 
                         <div>
                           <p className="text-[11px] font-black uppercase text-nails-brown">
@@ -401,7 +372,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
                           </div>
                         </div>
 
-                        {/* FECHA / HORA */}
+                     
 
                         <div className="grid grid-cols-2 gap-3">
                           <div>
@@ -432,7 +403,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
                           </div>
                         </div>
 
-                        {/* SERVICIOS */}
+                      
 
                         <div>
                           <p className="text-[11px] font-black uppercase text-nails-brown">
@@ -446,7 +417,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
                           </div>
                         </div>
 
-                        {/* PAGO */}
+                     
 
                         <div className="grid grid-cols-2 gap-3">
                           <div>
@@ -474,7 +445,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
                           </div>
                         </div>
 
-                        {/* MONTOS */}
+                     
 
                         <div className="grid grid-cols-3 gap-3">
                           <div>
@@ -508,7 +479,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
                           </div>
                         </div>
 
-                        {/* ESTADO PAGO */}
+                    
 
                         <div>
                           <p className="text-[11px] font-black uppercase text-nails-brown">
@@ -522,7 +493,7 @@ const totalAtendidas = citas.filter( (cita) => esCitaAtendida( cita.estado ) ).l
                           </div>
                         </div>
 
-                        {/* ACCIÓN */}
+                        
 
                         <div className="pt-1">
                           {renderAccion( cita, pagoVerificado )}
