@@ -47,7 +47,7 @@ export default function Navbar() {
              alt="Michelle Salon And Spa"
              width={300}
              height={300}
-             className="h-20 w-20 object-contain  sm:h-20 sm:w-20 md:h-20 md:w-20 lg:h-60 lg:w-60 "
+             className="h-20 w-20 object-contain  sm:h-30 sm:w-30 md:h-30 md:w-30 lg:h-60 lg:w-60 "
           />
         </Link>
 
