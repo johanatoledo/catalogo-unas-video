@@ -115,6 +115,7 @@ export default function ServiceMedia({ image, video, name, priority = false }) {
           src={image}
           alt={name}
           fill
+          unoptimized
           priority={priority}
           sizes={IMAGE_SIZES}
           className="object-cover transition-transform duration-500 group-hover:scale-105"

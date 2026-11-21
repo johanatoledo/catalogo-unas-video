@@ -5,7 +5,7 @@ import sharp from "sharp";
 const inputDir = path.resolve("./public");
 const outputDir = path.resolve("./assets-optimized");
 
-const imageExtensions = [".jpg", ".jpeg", ".png"];
+const imageExtensions = [".jpg", ".jpeg", ".png", ".jfif"];
 
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) {
